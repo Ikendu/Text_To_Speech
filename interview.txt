@@ -1,0 +1,538 @@
+Here are **30 React.js interview questions and model answers** suitable for a **Senior Software Developer AI interview**. The answers are concise but detailed enough to demonstrate senior-level understanding.
+
+---
+
+# 1. What is React, and why is it popular?
+
+**Answer:**
+React is a JavaScript library for building user interfaces, particularly single-page applications. It is popular because of its component-based architecture, Virtual DOM, reusable UI components, strong ecosystem, and efficient rendering performance.
+
+---
+
+# 2. What is the Virtual DOM?
+
+**Answer:**
+The Virtual DOM is a lightweight JavaScript representation of the actual DOM. When state changes occur, React creates a new Virtual DOM tree, compares it with the previous one using a diffing algorithm, and updates only the changed parts of the real DOM, improving performance.
+
+---
+
+# 3. Explain the React rendering lifecycle.
+
+**Answer:**
+The rendering lifecycle consists of:
+
+1. Render Phase – React calculates what the UI should look like.
+2. Reconciliation – React compares the new Virtual DOM with the previous version.
+3. Commit Phase – React updates the actual DOM.
+
+React may re-render multiple times before committing updates.
+
+---
+
+# 4. What are React Hooks?
+
+**Answer:**
+Hooks are functions that allow functional components to use React features such as state and lifecycle methods.
+
+Examples:
+
+* useState
+* useEffect
+* useContext
+* useReducer
+* useMemo
+* useCallback
+* useRef
+
+Hooks eliminate the need for most class components.
+
+---
+
+# 5. What is the difference between useState and useReducer?
+
+**Answer:**
+
+**useState**
+
+* Best for simple state management.
+* Easier to read.
+
+**useReducer**
+
+* Better for complex state logic.
+* Useful when multiple state values depend on one another.
+* Similar to Redux reducers.
+
+Example use cases:
+
+* useState → form input
+* useReducer → shopping cart, authentication flow
+
+---
+
+# 6. Explain useEffect and its dependency array.
+
+**Answer:**
+
+```jsx
+useEffect(() => {
+  fetchData();
+}, [userId]);
+```
+
+* No dependency array → runs after every render.
+* Empty array `[]` → runs once after mount.
+* Dependencies `[userId]` → runs when userId changes.
+
+It is commonly used for API calls, subscriptions, and side effects.
+
+---
+
+# 7. What causes unnecessary re-renders in React?
+
+**Answer:**
+
+Common causes:
+
+* Parent component re-renders
+* New object references
+* New function references
+* State updates
+* Context updates
+
+Optimization techniques:
+
+* React.memo
+* useMemo
+* useCallback
+* State colocation
+
+---
+
+# 8. What is React.memo?
+
+**Answer:**
+
+React.memo prevents unnecessary re-rendering of functional components by memoizing rendered output.
+
+```jsx
+const UserCard = React.memo(({ user }) => {
+  return <div>{user.name}</div>;
+});
+```
+
+The component only re-renders when props change.
+
+---
+
+# 9. Explain useMemo.
+
+**Answer:**
+
+useMemo memoizes expensive calculations.
+
+```jsx
+const total = useMemo(() => {
+  return calculateTotal(items);
+}, [items]);
+```
+
+It prevents recalculating values on every render.
+
+---
+
+# 10. Explain useCallback.
+
+**Answer:**
+
+useCallback memoizes functions.
+
+```jsx
+const handleClick = useCallback(() => {
+  console.log("clicked");
+}, []);
+```
+
+Useful when passing callbacks to child components to avoid unnecessary renders.
+
+---
+
+# 11. What is React Context API?
+
+**Answer:**
+
+Context provides a way to share data across components without prop drilling.
+
+```jsx
+const AuthContext = createContext();
+```
+
+Common uses:
+
+* Authentication
+* Theme management
+* User preferences
+* Localization
+
+---
+
+# 12. What are controlled and uncontrolled components?
+
+**Answer:**
+
+Controlled:
+
+```jsx
+<input value={name} onChange={handleChange} />
+```
+
+State is managed by React.
+
+Uncontrolled:
+
+```jsx
+<input ref={inputRef} />
+```
+
+State is managed by the DOM.
+
+Controlled components are generally preferred.
+
+---
+
+# 13. What is prop drilling?
+
+**Answer:**
+
+Prop drilling occurs when data is passed through multiple levels of components that do not use the data themselves.
+
+Solutions:
+
+* Context API
+* Redux
+* Zustand
+* Recoil
+
+---
+
+# 14. What is reconciliation?
+
+**Answer:**
+
+Reconciliation is React's process of comparing the previous Virtual DOM tree with the new one and determining the minimum number of updates required for the actual DOM.
+
+---
+
+# 15. Why are keys important in React lists?
+
+**Answer:**
+
+Keys help React identify elements efficiently.
+
+```jsx
+users.map(user => (
+  <User key={user.id} />
+));
+```
+
+Using indexes as keys may cause bugs during insertions and deletions.
+
+---
+
+# 16. Explain React Fiber.
+
+**Answer:**
+
+React Fiber is React's reconciliation engine introduced in React 16.
+
+Benefits:
+
+* Incremental rendering
+* Better scheduling
+* Prioritized updates
+* Improved responsiveness
+
+---
+
+# 17. What is Concurrent Rendering?
+
+**Answer:**
+
+Concurrent Rendering allows React to interrupt rendering work and prioritize more important updates.
+
+Benefits:
+
+* Smoother UI
+* Better responsiveness
+* Reduced blocking
+
+---
+
+# 18. What are Higher-Order Components (HOCs)?
+
+**Answer:**
+
+A HOC is a function that takes a component and returns an enhanced component.
+
+```jsx
+const withAuth = Component => {
+  return props => {
+    return <Component {...props} />;
+  };
+};
+```
+
+Used for cross-cutting concerns.
+
+---
+
+# 19. What is code splitting?
+
+**Answer:**
+
+Code splitting reduces bundle size by loading code only when needed.
+
+```jsx
+const Dashboard = React.lazy(() =>
+  import("./Dashboard")
+);
+```
+
+Combined with:
+
+```jsx
+<Suspense fallback={<Loader />}>
+```
+
+---
+
+# 20. Explain lazy loading in React.
+
+**Answer:**
+
+Lazy loading delays component loading until required.
+
+Benefits:
+
+* Faster initial load
+* Reduced bundle size
+* Better performance
+
+Implemented using:
+
+```jsx
+React.lazy()
+Suspense
+```
+
+---
+
+# 21. What is hydration in React?
+
+**Answer:**
+
+Hydration attaches React event handlers to server-rendered HTML.
+
+Used in frameworks like:
+
+* Next.js
+* Remix
+
+This improves SEO and initial page load speed.
+
+---
+
+# 22. Explain Server-Side Rendering (SSR).
+
+**Answer:**
+
+SSR renders pages on the server before sending HTML to the browser.
+
+Advantages:
+
+* Better SEO
+* Faster initial content display
+* Improved social sharing
+
+Disadvantages:
+
+* Increased server load
+* More complexity
+
+---
+
+# 23. What is the difference between SSR, CSR, and SSG?
+
+**Answer:**
+
+CSR:
+
+* Rendered in browser
+* Slower first load
+* Rich interactivity
+
+SSR:
+
+* Rendered on server
+* Better SEO
+
+SSG:
+
+* Generated at build time
+* Fastest performance
+* Ideal for static content
+
+---
+
+# 24. How do you handle global state in React?
+
+**Answer:**
+
+Common solutions:
+
+* Context API
+* Redux Toolkit
+* Zustand
+* Recoil
+* Jotai
+
+For enterprise applications, Redux Toolkit is often preferred due to predictable state management.
+
+---
+
+# 25. What is Redux Toolkit and why is it preferred?
+
+**Answer:**
+
+Redux Toolkit simplifies Redux development.
+
+Features:
+
+* configureStore
+* createSlice
+* createAsyncThunk
+
+Benefits:
+
+* Less boilerplate
+* Better defaults
+* Easier maintenance
+
+---
+
+# 26. How would you optimize a large React application?
+
+**Answer:**
+
+Techniques include:
+
+* Code splitting
+* Lazy loading
+* Memoization
+* Virtualization
+* Caching
+* Bundle analysis
+* Server-side rendering
+* Efficient state management
+
+---
+
+# 27. What is React Query (TanStack Query)?
+
+**Answer:**
+
+React Query manages server state.
+
+Benefits:
+
+* Automatic caching
+* Background refetching
+* Pagination support
+* Optimistic updates
+* Request deduplication
+
+It significantly reduces API-related boilerplate.
+
+---
+
+# 28. How do you prevent memory leaks in React?
+
+**Answer:**
+
+Clean up side effects.
+
+```jsx
+useEffect(() => {
+  const timer = setInterval(fetchData, 1000);
+
+  return () => clearInterval(timer);
+}, []);
+```
+
+Also unsubscribe from:
+
+* WebSockets
+* Event listeners
+* API subscriptions
+
+---
+
+# 29. How would you design a scalable React architecture?
+
+**Answer:**
+
+A scalable architecture typically includes:
+
+* Feature-based folder structure
+* Reusable components
+* Custom hooks
+* Centralized API layer
+* State management strategy
+* Testing strategy
+* CI/CD pipeline
+* TypeScript adoption
+
+The goal is maintainability and team scalability.
+
+---
+
+# 30. Describe a challenging React performance issue you've solved.
+
+**Answer:**
+
+A dashboard application became slow due to thousands of rows rendering simultaneously.
+
+Solution:
+
+* Implemented virtualization using react-window.
+* Added React.memo for row components.
+* Used useMemo for expensive calculations.
+* Reduced unnecessary state updates.
+* Added lazy loading for charts.
+
+Result:
+
+* Initial render time reduced by over 70%.
+* Memory consumption significantly decreased.
+* User interactions became noticeably smoother.
+
+---
+
+### Senior-Level AI Interview Tip
+
+For a senior React interview, AI interviewers often look beyond definitions and focus on:
+
+* Performance optimization
+* State management decisions
+* Scalability
+* Architecture design
+* SSR vs CSR tradeoffs
+* React internals (Fiber, Reconciliation)
+* Testing strategies
+* Real-world problem solving
+
+When answering, use the pattern:
+
+**Problem → Decision → Implementation → Result**
+
+This demonstrates senior-level engineering thinking rather than just React knowledge.
