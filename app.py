@@ -6,7 +6,7 @@ from docx import Document
 # Male voice
 VOICE = "en-US-ChristopherNeural"
 # Slower speech
-RATE = "-20%"
+RATE = "-30%"
 
 print("Starting conversion, Please wait...")
 
